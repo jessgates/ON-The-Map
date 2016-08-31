@@ -11,17 +11,17 @@ import Foundation
 
 extension UdacityClient {
     
-    func authenticateWithUsernamePassword(username: String, password: String, completionHandlerForAuth: (success: Bool, error: String) -> Void) {
+    func authenticateWithUsernamePassword(username: String, password: String, completionHandlerForAuth: (success: Bool, error: NSError?) -> Void) {
 
         getSessionId(username, password: password) { (success, sessionId, accountKey, error) in
             if success {
                 self.sessionID = sessionId
                 self.accountKey = accountKey
+                completionHandlerForAuth(success: true, error: nil)
+                self.getUserdata()
             } else {
-                completionHandlerForAuth(success: false, error: "Invalid Username or Password")
+                completionHandlerForAuth(success: false, error: error)
             }
-            
-            self.getUserdata()
         }
     }
     
@@ -35,8 +35,6 @@ extension UdacityClient {
             if let error = error {
                 completionHandlerForSession(success: false, sessionId: nil, accountKey: nil, error: error)
             } else {
-                print(results)
-                
                 guard let accountDictionary = results[UdacityClient.JSONResponseKeys.Account] as? [String: AnyObject] else {
                     print("Could not find key \(UdacityClient.JSONResponseKeys.Account) in \(results)")
                     return
@@ -67,8 +65,21 @@ extension UdacityClient {
                 
                 self.firstName = firstName
                 self.lastName = lastName
-                print(firstName)
-                print(lastName)
+            }
+        }
+    }
+    
+    func deleteSessionID() {
+        
+        taskForDELETEMethod() { (result, error) in
+            
+            if let error = error {
+                
+                print(error)
+                
+            } else {
+                
+                print(result)
             }
         }
     }
