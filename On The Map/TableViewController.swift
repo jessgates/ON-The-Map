@@ -15,11 +15,6 @@ class TableViewController: UITableViewController {
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var pinButton: UIBarButtonItem!
     
-    
-    @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewDidLoad()
         
@@ -83,4 +78,10 @@ class TableViewController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+        UdacityClient.sharedInstance().deleteSessionID()
+    }
+    
 }

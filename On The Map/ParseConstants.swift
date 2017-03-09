@@ -15,6 +15,7 @@ extension ParseClient {
         static let ApiScheme = "https"
         static let ApiHost = "parse.udacity.com"
         static let ApiPath = "/parse/classes/StudentLocation"
+        static let UpdateStudentPath = "https://parse.udacity.com/parse/classes/StudentLocation/<objectId>"
         
     }
     
@@ -22,15 +23,18 @@ extension ParseClient {
         
         static let PostMethod = "POST"
         static let GetMethod = "GET"
+        static let PutMethod = "PUT"
         
     }
     
     struct Headers {
         
-        static let ForApiAplicationID = "X-Parse-Application-Id"
-        static let ForRestApiKey = "X-Parse-REST-API-Key"
+        static let ForHeaderFieldApiAplicationID = "X-Parse-Application-Id"
+        static let ForHeaderFieldRestApiKey = "X-Parse-REST-API-Key"
+        static let ForHeaderFieldContenetType = "Content-Type"
         static let ApiAplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         static let RestApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+        static let ContentType = "application/json"
         
     }
     
@@ -41,6 +45,14 @@ extension ParseClient {
         static let Order = "order"
         static let Where = "where"
         static let ObjectId = "objectId"
+        
+    }
+    
+    struct ParameterValue {
+        
+        static let Limit = "100"
+        static let Order = "-updatedAt"
+
     }
     
     struct JSONResponseKeys {

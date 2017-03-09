@@ -17,6 +17,7 @@ extension UdacityClient {
         static let ApiPath = "/api"
         static let ApiPostandDeleteMethod = "/session"
         static let ApiUserMethod = "/users/<user_id>"
+        static let UdacitySignUpLink = "https://www.udacity.com/account/auth#!/signup"
     }
     
     struct JSONBodyKeys {

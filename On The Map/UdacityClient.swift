@@ -63,7 +63,6 @@ class UdacityClient: NSObject {
         {
     
         let request = NSMutableURLRequest(URL: udacityURLFromParameters(UdacityClient.Constants.ApiPostandDeleteMethod))
-            print(request)
             
         request.HTTPMethod = "POST"
             

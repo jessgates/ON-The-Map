@@ -19,10 +19,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewDidLoad()
+        mapView.delegate = self
         
         ParseClient.sharedInstance().getStudentLocations { (success, data, error) in
             
-            performUIUpdatesOnMain() {
+            performUIUpdatesOnMain {
                 if error == nil {
                     self.mapView.addAnnotations(StudentModel.sharedInstance().annotations!)
                 } else {
@@ -41,7 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinColor = .Red
+            pinView!.pinTintColor = UIColor.redColor()
             pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
         }
         else {
@@ -70,6 +71,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) { 
         mapView.removeAnnotations(mapView.annotations)
+    }
+    
+    @IBAction func logoutButtonPressed(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+        UdacityClient.sharedInstance().deleteSessionID()
     }
     
 }
